@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Societe index{% endblock %}
+
+{% block body %}
+    <h1>Societe index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>NumeroSiren</th>
+                <th>VilleImmatriculation</th>
+                <th>DateImmatriculation</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for societe in societes %}
+            <tr>
+                <td>{{ societe.id }}</td>
+                <td>{{ societe.nom }}</td>
+                <td>{{ societe.numeroSiren }}</td>
+                <td>{{ societe.villeImmatriculation }}</td>
+                <td>{{ societe.dateImmatriculation ? societe.dateImmatriculation|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('societe_show', {'id': societe.id}) }}">show</a>
+                    <a href="{{ path('societe_edit', {'id': societe.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('societe_new') }}">Create new</a>
+{% endblock %}
